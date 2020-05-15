@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 const favorite = require('./api/routes/favorite');
 const userData = require('./api/routes/userData');
 
+
+
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -41,10 +44,11 @@ app.use(function(req, res, next) {
    
     // render the error page
     res.status(err.status || 500);
+    console.log('500 error : '+err);
     res.json(
        {
          status:'500',
-        error:'an error has occured :('
+        error:err
        }
     );
     
