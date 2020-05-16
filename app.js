@@ -9,7 +9,7 @@ const userData = require('./api/routes/userData');
 
 
 
-
+app.use(express.static('upload/'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());

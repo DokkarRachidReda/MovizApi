@@ -5,7 +5,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination : function(req,file,cb){
-        cb(null,'upload/');
+        cb(null,'upload/'); 
     },
     filename :function(req,file,cb){
         cb( null,req.params.id+ '_' +file.originalname);
@@ -73,7 +73,7 @@ router.post('/uploadimg/:id',upload.single('img'),(req,res,next)=>{
 
     var id = req.params.id;
     
-    var query = 'update users set img = "'+req.file.path+'" where id = "'+id+'";';
+    var query = 'update users set img = "'+req.file.filename+'" where id = "'+id+'";';
     console.log(query); 
 
     mysql.query(query,(error,results,fields)=>{
@@ -87,7 +87,7 @@ router.post('/uploadimg/:id',upload.single('img'),(req,res,next)=>{
      }
      
      res.json({   
-     status : 200
+     status : req.file.filename
      });
          
     });
